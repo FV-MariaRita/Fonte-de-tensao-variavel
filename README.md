@@ -57,7 +57,7 @@ Imagem do manual do Transistor de passagem 2N2222:
 
 **Resistores de Apoio:** 
 1. Resistor de 3.3kΩ (em série com o LED): Limita a corrente que passa pelo LED indicador para não queimá-lo.
-2. Resistor de 820Ω: Posicionado logo antes do diodo zener para polarizar o Zener de forma segura.
+2. Resistor de 820Ω: Posicionado logo antes do diodo zener para polarizar o zener de forma segura.
 3. Resistor de 5.1kΩ: Limita o mínimo de tensão a 3V, para que mesmo ao girar o potenciômetro para o mínimo a tensão não zere.
 4. Resistores de 100Ω e 120Ω: Estabilizam as correntes de base e emissor do transistor. 
 
@@ -73,32 +73,35 @@ $$V_{\text{pico transformador}} = V_{rms} \times \sqrt{2} = 18,1 \times \sqrt{2}
 
 
 * **Queda de tensão na Ponte de Diodos:** A corrente contínua atravessa dois diodos simultaneamente na retificação da Ponte de Diodos. Considerando uma queda típica de $0,7\text{ V}$ por diodo, a tensão máxima retificada é:
-$$V_{\text{pico diodos}} = V_{\text{pico transformador}} - (0,7 \times 2)$$
-$$V_{\text{pico diodos}} = 25,59 - 1,4 = 24,19\text{ V} \approx 24,2\text{ V}$$
+
+  $$V_{\text{pico diodos}} = V_{\text{pico transformador}} - (0,7 \times 2)$$
+
+  $$V_{\text{pico diodos}} = 25,59 - 1,4 = 24,19\text{ V} \approx 24,2\text{ V}$$
 
 * **Relação de Espiras do Transformador:** A relação de espiras é dada pela razão da quantidade de espiras no primário (entrada) e no secundário (saída). Essa razão é proporcional à razão entre a tensão primária e a tensão secundária. Por isso:
-$$\text{Relação de espiras} = \frac{V_{rms\text{ tomada}}}{V_{rms\text{ transformador}}} = \frac{127}{18,1} \approx 7,016$$
+
+  $$\text{Relação de espiras} = \frac{V_{rms\text{ tomada}}}{V_{rms\text{ transformador}}} = \frac{127}{18,1} \approx 7,016$$
 
 * **Cálculo do Ripple:** O Ripple é o componente de corrente alternada que se sobrepõe ao valor médio da tensão de uma fonte de corrente contínua. A origem da ondulação normalmente está associada à utilização de carregadores baseados em retificadores. Normalmente é um valor residual e periódico obtido de uma fonte de tensão que é alimentada por uma corrente alternada. Para o projeto da fonte,
 o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 
-$\text{Ripple} = 10\% \times 24,19\text{V} = 2,419\text{ V}$
+   $Ripple = 10/100 * 24,19 = 2,419V$
 
-Como a oscilação máxima permitida é de $2,429V$, a tensão no capacitor deve oscilar entre $24,2\text{ V}$ (máximo) e $21,78\text{ V}$ (mínimo).
+    Como a oscilação máxima permitida é de $2,419V$, a tensão no capacitor deve oscilar entre $24,2\text{ V}$ (máximo) e $21,78\text{ V}$ (mínimo).
 
 * **Cálculo da Capacitância:** A capacitância mínima representa a menor capacidade de armazenamento de energia que o capacitor deve ter para conseguir "sustentar" a tensão da fonte firme, sem deixar que ela caia além do permitido enquanto a carga puxa a corrente máxima.
 
-$C = \frac{I_{carga}}{f \cdot \Delta v}$
+    $C = \frac{I_{carga}}{f \cdot \Delta v}$
 
-$I_{carga} = 0,1\text{ A}$ (capacidade da fonte)
+    $I_{carga} = 0,1\text{ A}$ (capacidade da fonte)
 
-$f = 120\text{Hz}$ (frequência de rede retificada em onda completa)
+    $f = 120\text{Hz}$ (frequência de rede retificada em onda completa)
 
-$\Delta v = 2,42\text{V}$ (Ripple máx)
+    $\Delta v = 2,42\text{V}$ (Ripple máx)
 
-$C = \frac{I_{carga}}{f \cdot \Delta v} = \frac{0,1}{120 \cdot 2,419} = \frac{0,1}{290,28} = 3,444949 \cdot 10^{-4} = 344\mu\text{F}$
+    $C = \frac{I_{carga}}{f \cdot \Delta v} = \frac{0,1}{120 \cdot 2,419} = \frac{0,1}{290,28} = 3,444949 \cdot 10^{-4} = 344\mu\text{F}$
 
-Valor comercial superior mais próximo a 344µF : 470µF
+    Valor comercial superior mais próximo a 344µF : 470µF
 
 * **Resistor de Polarização do Zener ($R_z$):** O Zener precisa de um resistor em série para limitar a corrente que passa por ele, vinda dos 24,2V do capacitor. A tensão sobre esse resistor será:
 
