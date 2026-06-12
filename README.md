@@ -108,6 +108,10 @@ o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 
 ## Circuito no Falstad
 
+**Link:** https://tinyurl.com/4j2b377s
+
+[Circuito no Falstad](circuito_falstad.png)
+
 ## Esquemático no EasyEDA 
 
 ## PCB no EasyEDA
