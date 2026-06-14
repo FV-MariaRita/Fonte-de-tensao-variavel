@@ -123,7 +123,11 @@ Por questões de prevenção, decidimos colocar um resistor de 3,3k $\Omega$, de
 
 ## Esquemático no EasyEDA 
 
+![Esquemático no EasyEDA](circuito_fonte_esquematico.png)
+
 ## PCB no EasyEDA
+
+![PCB no EasyEDA](circuito_fonte_pcb.png)
 
 ## Fotos da Protoboard
 
