@@ -103,6 +103,15 @@ o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 
     Valor comercial superior mais próximo a 344µF : 470µF
 
+* **Resistor limitador de corrente do LED:** É necessário incluir no circuito um resistor em série com o LED para limitar a corrente que passa pelo componente e garantir seu bom funcionamento, combinando fatores como brilho e vida útil do LED. Para o LED 5MM Azul, a tensão varia entre 3V e 3,4V, e a corrente suportada é de no máximo 20mA. Adotemos 3,2V de tensão e uma corrente de 10mA (pois valores entre 5mA e 10mA garantem boa luminosidade e prolongam a vida útil) para os cálculos.
+
+  $Rled = \frac{Vin - Vled}{Iled} = \frac{24,2V - 3,2V}{10 mA} = 2,1k\Omega$
+
+Valor comercial superior mais próximo: 2,2k $\Omega$ 
+
+Por questões de prevenção, decidimos colocar um resistor de 3,3k $\Omega$, de modo que a corrente que chega no LED é de, aproximadamente, 6,3A, garantindo uma boa luminosidade e vida útil do LED. 
+
+
 * **Resistor de Polarização do Zener ($R_z$):** O Zener precisa de um resistor em série para limitar a corrente que passa por ele, vinda dos 24,2V do capacitor. A tensão sobre esse resistor será:
 
 
