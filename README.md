@@ -107,12 +107,54 @@ o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 
   $Rled = \frac{Vin - Vled}{Iled} = \frac{24,2V - 3,2V}{10 mA} = 2,1k\Omega$
 
-Valor comercial superior mais próximo: 2,2k $\Omega$ 
+  Valor comercial superior mais próximo: 2,2k $\Omega$ 
 
-Por questões de prevenção, decidimos colocar um resistor de 3,3k $\Omega$, de modo que a corrente que chega no LED é de, aproximadamente, 6,3A, garantindo uma boa luminosidade e vida útil do LED. 
+  Por questões de prevenção, decidimos colocar um resistor de 3,3k $\Omega$, de modo que a corrente que chega no LED é de, aproximadamente, 6,3A, garantindo uma boa luminosidade e vida útil do LED. 
 
 
-* **Resistor de Polarização do Zener ($R_z$):** O Zener precisa de um resistor em série para limitar a corrente que passa por ele, vinda dos 24,2V do capacitor. A tensão sobre esse resistor será:
+* **Resistor de Polarização do Zener ($R_z$):** O Zener precisa de um resistor em série para limitar a corrente que passa por ele. Assim, o resistor precisa absorver uma diferença de tensão de:
+
+  $V_{resistor} = 24,2V - 13V = 11,2V$
+ 
+  Pela Lei de Ohm, temos que:
+   
+  $U = R * I$
+    
+    $I = 11,2V / 820\ \Omega \approx 0,0136\ A$ (ou 13,6 mA)
+
+   **Corrente máxima:** Para o Zener conseguir começar a funcionar e travar a tensão em 13V, ele precisa receber uma corrente estável de teste (geralmente estipulada pelo fabricante em torno de 10 mA a 20 mA). Como o nosso cálculo deu 13,6 mA, estamos perfeitamente dentro da faixa onde o Zener trabalha com estabilidade.
+
+   **Corrente mínima:** O Zener do projeto suporta no máximo 1W de potência. Fazendo a conta ($1W / 13V$), descobrimos que ele aguentaria até uns 76 mA antes de derreter. Como estamos injetando apenas 13,6 mA, o circuito trabalha com uma margem de segurança excelente, sem superaquecer o diodo
+
+  **Por que escolhemos 820Ω em vez de outros valores comerciais?**
+
+  Fizemos uma análise comparativa utilizando valores comerciais para encontrar a resistência ideal:
+
+  - *Se utilizássemos 560Ω:* A corrente subiria para 20mA. Embora o Zener funcione bem, a potência dissipada no resistor seria de 0,224W, o qe eigiria um componente superdimensionado para evitar superaquecimento.
+  - *Se utilizássemos 910Ω:* A corrente total na malha cairia para 12,3mA. O Zener ficaria com uma corrente residual muito baixa, correndo o risco de sair da sua zona de regulação ideal e causar instabilidade na tensão de saída da fonte.
+  - *A escolha de 820Ω:* Mostrou-se o equilíbrio perfeito. A corrente de 13,65mA garante estabilidade total para o Zener (mesmo com o consumo da base do transistor), enquanto a potência dissipada estabiliza em apenas 0,153W, permitindo o uso seguro de resistores padrão de 1/4W de baixo custo.
+
+* **Resistor de $100Ω$:** Posicionado logo antes do Coletor do transistor, sua função é proteger o transistor do sobreaquecimento.
+
+    Análise do pior cenário de operação: saída mínima em 3V puxando corrente máxima de 100mA com tensão de entrada CC de 24,2V. A potência dissipada ($P_D$)sem o resistor seria de: 
+
+    $P_D = V_{CE} * I_{carga} = 21,2V * 0,1A = 2,12W$
+
+    O transistor 2N2222 suporta no máximo 1W, então ele queimaria por superaquecimento.
+
+    *Escolha do Resistor de 100Ω*
+    - Queda de tensão absorvida pelo resistor:
+      $V_{R} = I \times R = 0,1\\text{A} \times 100\\Omega = 10\\text{V}$
+    - Nova tensão que chega no Coletor do Transistor ($V_C$):
+      $V_C = 24,2\\text{V} - 10\\text{V} = 14,2\\text{V}$
+    - Nova potência dissipada pelo transistor ($P_{transistor}$): a tensão presa dentro do transistor no pior cenário cai de $21,2\\text{V}$ para $11,2\\text{V}$ ($14,2\\text{V} - 3\\text{V}$).
+
+      $P_{transistor} = 11,2\\text{V} \times0,1\\text{A} = 1,12\\text{W}$
+
+  - Potência que o resistor "roubou" para si ($P_{R}$): $P_{R} = (I)^2 \times R = (0,1\\text{A})^2 \times 100\\Omega = 0,1 \times 100 = 1\\text{W}$
+  - **Conclusão:** O resistor puxa para si $1\\text{W}$ da potência total que destruiria o transistor. Isso traz a operação do transistor para bem perto do seu limite de segurança ($1,12\\text{W}$), tornando o circuito viável na prática sem que o semicondutor queime instantaneamente.
+
+* **Resistor de $120\Omega$:** Carga de teste que representa um dispositivo externo, como um celular por exmplo, que estaria conectado à fonte ajustável. A inclusão deste componente no simulador serve para testar o circuito. Mesmo quando um aparelho exige o máximo de corrente projetado (100mA), a malha de regulação do diodo Zener e do transistor consegue manter os 12V  estáveis e sem quedas bruscas de tensão.
 
 
 ## Circuito no Falstad
