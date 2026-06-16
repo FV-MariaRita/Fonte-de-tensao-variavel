@@ -29,8 +29,10 @@ A partir da tomada, teremos uma tensão eficaz de 127V, com corrente alternada e
 | Resistor CR25 5K1 Carvão TL | 10 | R$0,07 |
 | Resistor CR25 3K3 Carvão | 10 | R$0,07 |
 | Resistor CR25 4K7 Carvão ROHA | 10 | R$0,07 |
+| Resistor 5W 100R 5% Metal Filme LGE | 2 | R$1,98 |
+| Resistor 5W 120R 5% Metal Filme LGE | 2 | R$1,90|
 | Jumper Macho x Macho (Kit com 10 peças) | 2 | R$7,00 |
-| **Total** | | **R$50,10** |
+| **Total** | | **R$57,86** |
   
 ## Descrição dos componentes utilizados
 
