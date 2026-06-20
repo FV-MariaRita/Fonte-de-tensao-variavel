@@ -174,6 +174,7 @@ o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 ![PCB no EasyEDA](circuito_fonte_pcb.png)
 
 ## Fotos da Protoboard
-![Foto da protoboard](IMG-20260616-WA0005.jpg)
+![Foto1 da protoboard](IMG-20260616-WA0005.jpg)
+![Foto2 da protoboard](IMG-20260616-WA0006(1).jpg)
 
 ## Explicação em vídeo do projeto 
