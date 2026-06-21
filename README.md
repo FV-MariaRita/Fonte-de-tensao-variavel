@@ -178,3 +178,4 @@ o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 ![Foto2 da protoboard](IMG-20260616-WA0006(1).jpg)
 
 ## Explicação em vídeo do projeto 
+https://youtu.be/Q_8tqcviksQ
