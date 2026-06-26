@@ -18,21 +18,18 @@ A partir da tomada, teremos uma tensão eficaz de 127V, com corrente alternada e
 | Componentes        | Quantidade           | Valores  |
 | ------------- |:-------------:| -----|
 | Capacitor ELCO 470µF x 35V 105 C 10X16     | 2 | R$2,80 |
-| Capacitor ELCO 330µF x 25V 105 C 10X12.5 | 1 | R$3,30 |
 | Diodo Retificador 1N4007 LGE = 1N4004      | 10      | R$0,20 |
 | Diodo Zenner 1N4743 13V 1W | 2      |    R$0,50 |
 | LED 5MM Azul Difuso EVERLIGHT | 3 | R$0,50 |
 | Potenciômetro 1W B10K B-16,5 x E-20-XR-7MM| 2   | R$7,00 |
 | Transistor 2N2222A NPN 60V 0,8A TO-92 | 2  |  R$2,60 |
-| Resistor CR25 120R Carvão | 10   | R$0,07 |
-| Resistor CR25 100R Carvão ROHS | 10  | R$0,07 |
 | Resistor CR25 5K1 Carvão TL | 10 | R$0,07 |
 | Resistor CR25 3K3 Carvão | 10 | R$0,07 |
 | Resistor CR25 4K7 Carvão ROHA | 10 | R$0,07 |
 | Resistor 5W 100R 5% Metal Filme LGE | 2 | R$1,98 |
 | Resistor 5W 120R 5% Metal Filme LGE | 2 | R$1,90|
 | Jumper Macho x Macho (Kit com 10 peças) | 2 | R$7,00 |
-| **Total** | | **R$57,86** |
+| **Total** | | **R$53,16** |
   
 ## Descrição dos componentes utilizados
 
@@ -163,10 +160,15 @@ o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 
 **Link:** https://tinyurl.com/mz5fkhtu
 
+![Circuito no Falstad](circuito_falstad.png)
 
 ## Esquemático no EasyEDA 
 
+![Esquematico no EasyEDA](circuito_fonte_esquematico.png)
+
 ## PCB no EasyEDA
+
+![PCB no EasyEDA](circuito_pcb.png)
 
 ## Fotos da Protoboard
 ![Foto1 da protoboard](IMG-20260616-WA0005.jpg)
