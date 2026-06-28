@@ -56,9 +56,9 @@ Imagem do manual do Transistor de passagem 2N2222:
 
 **Resistores de Apoio:** 
 1. Resistor de 3.3kΩ (em série com o LED): Limita a corrente que passa pelo LED indicador para não queimá-lo.
-2. Resistor de 820Ω: Posicionado logo antes do diodo zener para polarizar o zener de forma segura.
+2. Resistor de 3.3kΩ (próximo ao Potenciômetro): Protege e estabiliza o sinal de controle (tensão de base) que vai para o transistor.
 3. Resistor de 5.1kΩ: Limita o mínimo de tensão a 3V, para que mesmo ao girar o potenciômetro para o mínimo a tensão não zere.
-4. Resistores de 100Ω e 120Ω: Estabilizam as correntes de base e emissor do transistor. 
+4. Resistor de 100Ω: Dissipa a potência que o transistor teria que dissipar e limita a corrente que passa pelo coletor. 
 
 ## Cálculos
 
@@ -110,34 +110,23 @@ o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 
   Por questões de prevenção, decidimos colocar um resistor de 3,3k $\Omega$, de modo que a corrente que chega no LED é de, aproximadamente, 6,3A, garantindo uma boa luminosidade e vida útil do LED. 
 
+* **Resistor de Polarização do Zener ($R_z$):** O diodo Zener precisa de um resistor em série para limitar a corrente e garantir que ele trabalhe com segurança. Esse resistor absorve a diferença entre a tensão de entrada filtrada e a tensão estável do Zener:
 
-* **Resistor de Polarização do Zener ($R_z$):** O Zener precisa de um resistor em série para limitar a corrente que passa por ele. Assim, o resistor precisa absorver uma diferença de tensão de:
+  $$V_{resistor} = 24,2\text{V} - 13\text{V} = 11,2\text{V}$$
 
-  $V_{resistor} = 24,2V - 13V = 11,2V$
+  Utilizando a Lei de Ohm ($I = V / R$) para o resistor de **5.1 kΩ** ($5100\ \Omega$) que está no circuito, calculamos a corrente que passa por essa malha:
+
+  $$I = \frac{11,2\text{V}}{5100\ \Omega} \approx 2,2\text{mA}$$
+
+  **Estabilidade:** Para fixar a tensão em $13\text{V}$, o diodo precisa de uma corrente mínima de operação. O valor de $2,2\text{mA}$ é ideal para mantê-lo ativo e regulando com estabilidade.
+
+  **Segurança Térmica:** O Zener utilizado suporta até $1\text{W}$ de potência (o que permitiria até $76,9\text{mA}$). Como estamos operando com apenas $2,2\text{mA}$, o componente trabalha com uma excelente margem de segurança e sem aquecimento.
  
-  Pela Lei de Ohm, temos que:
-   
-  $U = R * I$
-    
-    $I = 11,2V / 820\ \Omega \approx 0,0136\ A$ (ou 13,6 mA)
-
-   **Corrente máxima:** Para o Zener conseguir começar a funcionar e travar a tensão em 13V, ele precisa receber uma corrente estável de teste (geralmente estipulada pelo fabricante em torno de 10 mA a 20 mA). Como o nosso cálculo deu 13,6 mA, estamos perfeitamente dentro da faixa onde o Zener trabalha com estabilidade.
-
-   **Corrente mínima:** O Zener do projeto suporta no máximo 1W de potência. Fazendo a conta ($1W / 13V$), descobrimos que ele aguentaria até uns 76 mA antes de derreter. Como estamos injetando apenas 13,6 mA, o circuito trabalha com uma margem de segurança excelente, sem superaquecer o diodo
-
-  **Por que escolhemos 820Ω em vez de outros valores comerciais?**
-
-  Fizemos uma análise comparativa utilizando valores comerciais para encontrar a resistência ideal:
-
-  - *Se utilizássemos 560Ω:* A corrente subiria para 20mA. Embora o Zener funcione bem, a potência dissipada no resistor seria de 0,224W, o qe eigiria um componente superdimensionado para evitar superaquecimento.
-  - *Se utilizássemos 910Ω:* A corrente total na malha cairia para 12,3mA. O Zener ficaria com uma corrente residual muito baixa, correndo o risco de sair da sua zona de regulação ideal e causar instabilidade na tensão de saída da fonte.
-  - *A escolha de 820Ω:* Mostrou-se o equilíbrio perfeito. A corrente de 13,65mA garante estabilidade total para o Zener (mesmo com o consumo da base do transistor), enquanto a potência dissipada estabiliza em apenas 0,153W, permitindo o uso seguro de resistores padrão de 1/4W de baixo custo.
-
 * **Resistor de $100Ω$:** Posicionado logo antes do Coletor do transistor, sua função é proteger o transistor do sobreaquecimento.
 
-    Análise do pior cenário de operação: saída mínima em 3V puxando corrente máxima de 100mA com tensão de entrada CC de 24,2V. A potência dissipada ($P_D$)sem o resistor seria de: 
+    Análise do pior cenário de operação: saída mínima em 3V puxando corrente máxima de 100mA com tensão de entrada CC de 24,2V. A potência dissipada ($P_D$) sem o resistor seria de: 
 
-    $P_D = V_{CE} * I_{carga} = 21,2V * 0,1A = 2,12W$
+    $$P_D = V_{CE} * I_{carga} = 21,2V * 0,1A = 2,12W$$
 
     O transistor 2N2222 suporta no máximo 1W, então ele queimaria por superaquecimento.
 
@@ -150,8 +139,8 @@ o ripple deve ser de **no máximo 10%** sobre a tensão retificada:
 
       $P_{transistor} = 11,2\\text{V} \times0,1\\text{A} = 1,12\\text{W}$
 
-  - Potência que o resistor "roubou" para si ($P_{R}$): $P_{R} = (I)^2 \times R = (0,1\\text{A})^2 \times 100\\Omega = 0,1 \times 100 = 1\\text{W}$
-  - **Conclusão:** O resistor puxa para si $1\\text{W}$ da potência total que destruiria o transistor. Isso traz a operação do transistor para bem perto do seu limite de segurança ($1,12\\text{W}$), tornando o circuito viável na prática sem que o semicondutor queime instantaneamente.
+
+  - **Conclusão:** O valor seguro de resistência para não sobreaquecer o transistor seria entre 2W e 3W, mas por questões de disponibilidade na loja em que compramos os componentes só foi possível comprar o resistor de $100Ω$ e $5W$.
 
 * **Resistor de $120\Omega$:** Carga de teste que representa um dispositivo externo, como um celular por exmplo, que estaria conectado à fonte ajustável. A inclusão deste componente no simulador serve para testar o circuito. Mesmo quando um aparelho exige o máximo de corrente projetado (100mA), a malha de regulação do diodo Zener e do transistor consegue manter os 12V  estáveis e sem quedas bruscas de tensão.
 
